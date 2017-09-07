@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <title>FE7 Comparison Tool</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="banner" data-bind="text: title"></div>
+    <div id="content">
+      <!-- ko foreach: selectedCharacters -->
+        <div class="character">
+          <header>
+            <span data-bind="text: name"></span>
+            <div class="trash">
+              <i class="fa fa-trash-o" data-bind="click: hide"></i>
+            </div>
+          </header>
+          <div class="padder" data-bind="style: {height: padding}"></div>
+          <div class="stat-table">
+            <table>
+              <thead>
+                <tr>
+                  <td></td>
+                  <td>Lv</td>
+                  <td>HP</td>
+                  <td>S/M</td>
+                  <td>Skl</td>
+                  <td>Spd</td>
+                  <td>Lck</td>
+                  <td>Def</td>
+                  <td>Res</td>
+                  <td>BST</td>
+                </tr>
+              </thead>
+              <tbody data-bind="foreach: allLevels">
+                <tr data-bind="css: {selected: isSelected, promoted: isPromoted}">
+                  <td class="actions">
+                    <i class="fa fa-bookmark-o" data-bind="click: select"></i>
+                    <i class="fa fa-bookmark" data-bind="click: select"></i>
+                    <span data-bind="if: canPromote">
+                      <i class="fa fa-graduation-cap" data-bind="click: promote"></i>
+                    </span>
+                  </td>
+                  <td>
+                    <span data-bind="text: lv"></span>
+                  </td>
+                  <!-- ko if: !isSelected() -->
+                  <!-- ko foreach: stats -->
+                  <td>
+                    <span data-bind="text: rounded, css: {max: isMax}"></span>
+                  </td>
+                  <!-- /ko -->
+                  <!-- /ko -->
+
+                  <!-- ko if: isSelected -->
+                  <!-- ko foreach: stats -->
+                  <td data-bind="css: {max: isMax}">
+                    <span data-bind="text: int"></span><small>.<span data-bind="text: fracText"></span></small>
+                  </td>
+                  <!-- /ko -->
+                  <!-- /ko -->
+                  <td data-bind="text: bst"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <!-- /ko -->
+
+      <div class="character">
+        <header>
+          <select data-bind="options: availableCharacters, optionsText: 'name', value: pendingCharacter, optionsCaption: 'Add a character...'"></select>
+        </header>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="data.js"></script>
+    <script src="char.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
