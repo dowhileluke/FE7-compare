@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+}
+
+#app {
+  border: 1px solid red;
+  overflow-x: hidden;
+}
+
+#container {
+  display: flex;
+  width: 200%;
+  position: fixed;
+}
+
+section {
+  flex: 1 0 0;
+  transition: transform 200ms;
+}
+
+/* wide layout */
+@media (min-width: 760px) {
+  #container {
+    background: #eef;
+    width: 100%;
+    position: static;
+  }
+
+  section {
+    flex: unset;
+    width: 360px;
+  }
+}
+
+.pushed {
+  transform: translate(-100%, 0);
+}
