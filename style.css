@@ -2,105 +2,36 @@ body {
   margin: 0;
 }
 
-#banner {
-  position: absolute;
-  width: 100%;
+#app {
+  border: 1px solid red;
+  overflow-x: hidden;
 }
 
-#banner, header, .trash {
-  background-color: #2196f3;
-  height: 40px;
-  line-height: 40px;
+#container {
+  display: flex;
+  width: 200%;
+  position: fixed;
 }
 
-#content {
-  position: absolute;
-  font-size: 0;
-  white-space: nowrap;
+section {
+  flex: 1 0 0;
+  transition: transform 200ms;
 }
 
-.character {
-  min-width: 350px;
-  display: inline-block;
-  font: 8pt verdana;
-  line-height: 13px;
+/* wide layout */
+@media (min-width: 720px) {
+  #container {
+    background: #eef;
+    width: 100%;
+    position: static;
+  }
+
+  section {
+    flex: unset;
+    width: 360px;
+  }
 }
 
-header {
-  position: relative;
-  color: white;
-  font-size: 16pt;
-  text-align: center;
-}
-
-.trash {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.stat-table {
-  padding: 4px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-td {
-  padding: 0;
-}
-
-thead td {
-  text-align: center;
-  font-weight: bold;
-}
-
-tr.selected {
-  background-color: #ffecb3;
-  color: #ff8f00;
-}
-
-tbody td {
-  border-top: 1px solid black;
-  text-align: right;
-}
-
-.actions {
-  text-align: left;
-  width: 0;
-}
-
-.max {
-  font-weight: bold;
-}
-
-i.fa {
-  cursor: pointer;
-}
-
-table i {
-  color: #999;
-}
-
-table i.fa-bookmark {
-  display: none;
-}
-
-table .selected i.fa-bookmark {
-  color: inherit;
-  display: inline;
-}
-
-table .selected i.fa-bookmark-o {
-  display: none;
-}
-
-table .promoted i.fa-graduation-cap {
-  color: #4caf50;
-}
-
-small {
-  font-size: x-small;
+.pushed {
+  transform: translate(-100%, 0);
 }
