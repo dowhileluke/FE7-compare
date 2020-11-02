@@ -14,8 +14,8 @@ function DefineClassGrowthRates(name, growths) {
   extend(name, { growths });
 };
 
-function DefineClassPromotionBonuses(name, bonuses, caps, baseForm) {
-  extend(name, { bonuses, caps, baseForm });
+function DefineClassPromotionBonuses(name, bonuses, caps, basicForm) {
+  extend(name, { bonuses, caps, basicForm });
 };
 
 DefineClassBaseStats('LordLyn', [16,4,7,9,2,0,5,5]);
@@ -141,7 +141,7 @@ DefineClassGrowthRates('WyvernLordM',[75,40,30,20,20,20,17]);
 DefineClassGrowthRates('WyvernRiderF',[80,45,35,30,25,25,17]);
 DefineClassGrowthRates('WyvernRiderM',[80,45,35,30,25,25,15]);
 
-DefineClassPromotionBonuses('Archsage', null, [30, 30, 25, 20, 30]);
+DefineClassPromotionBonuses('Archsage', null, [30, 30, 25, 20, 30], 'unknown');
 DefineClassPromotionBonuses('Assassin', [3, 1, 0, 0, 2, 2, 0], [20, 30, 30, 20, 20], 'ThiefM');
 DefineClassPromotionBonuses('Berserker', [4, 1, 1, 1, 2, 2, 3], [30, 29, 28, 23, 21], 'Pirate');
 DefineClassPromotionBonuses('BishopF', [3, 1, 2, 1, 2, 2, 1], [25, 25, 26, 21, 30], 'Cleric');
@@ -171,21 +171,82 @@ DefineClassPromotionBonuses('Warrior', [3, 1, 2, 0, 3, 3, 2], [30, 28, 26, 26, 2
 DefineClassPromotionBonuses('WyvernLordF', null, [25, 26, 24, 27, 23], 'WyvernRiderF');
 DefineClassPromotionBonuses('WyvernLordM', [4, 0, 2, 2, 0, 2, 1], [27, 25, 23, 28, 22], 'WyvernRiderM');
 
-function a2s(arr) {
+// average of all three Lords' bases/growths
+classes.Lord = {
+  bases: [18,5,5,7,5,0,8],
+  growths: [80,50,50,45,45,35,30],
+};
+
+function asArray(arr) {
   if (!arr) return null;
 
   return `[${arr}]`;
 };
 
-function s(str) {
+function asString(str) {
   if (!str) return null;
+
   return `'${str}'`;
-}
+};
 
-Object.entries(classes).forEach(([key, value]) => {
-  const { bases, growths, bonuses, caps, baseForm } = value;
+const classNames = Object.keys(classes);
 
-  console.log(`BuildClass('${key}', ${a2s(bases)}, ${a2s(growths)}, ${a2s(caps)}, ${a2s(bonuses)}, ${s(baseForm)});`);
+classNames.sort((a, b) => a > b ? 1 : -1);
+
+const basicClassNames = [];
+const promoClassNames = [];
+
+classNames.forEach(name => {
+  const { basicForm } = classes[name];
+
+  if (basicForm) {
+    promoClassNames.push(name);
+  } else {
+    basicClassNames.push(name);
+  };
 });
 
-console.log("BuildClass('Lord', [18,5,5,7,5,0,8], [80,50,50,45,45,35,30]);")
+function trimTrailingNulls(arr) {
+  let result = [];
+  let temp = [];
+
+  arr.forEach(v => {
+    temp.push(v)
+
+    if (v) {
+      result = result.concat(temp);
+      temp = [];
+    };
+  });
+
+  return result;
+};
+
+function logClass(name) {
+  const { bases, growths, bonuses, caps, basicForm } = classes[name];
+  const props = [
+    asString(name),
+    asArray(bases),
+    asArray(growths),
+    asArray(caps),
+    asArray(bonuses),
+    asString(basicForm),
+  ];
+  const values = trimTrailingNulls(props);
+  const parts = [
+    'BuildClass(',
+    values.map(x => x ? x : 'null').join(', '),
+    ');'
+  ];
+
+  console.log(parts.join(''));
+};
+
+basicClassNames.forEach(n => logClass(n));
+promoClassNames.forEach(n => logClass(n));
+
+// Object.entries(classes).forEach(([key, value]) => {
+//   const { bases, growths, bonuses, caps, basicForm } = value;
+
+//   console.log(`BuildClass('${key}', ${a2s(bases)}, ${a2s(growths)}, ${a2s(caps)}, ${a2s(bonuses)}, ${s(basicForm)});`);
+// });
