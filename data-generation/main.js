@@ -1,3 +1,42 @@
+const [heroes, classes] = (function () {
+let heroList = [];
+let classDict = {};
+let lowerCaps = [60, 20, 20, 20, 30, 20, 20];
+
+function withLuck(arr, value = 0) {
+  return [...arr.slice(0, 4), value, ...arr.slice(4)];
+};
+
+// build class
+function bc(name, bases, growths, caps = [], bonuses = [], earlyClass) {
+  const isPromoted = !!earlyClass;
+
+  classDict[name] = {
+    bases: withLuck(bases),
+    growths,
+    caps: isPromoted ? withLuck([60, ...caps], 30) : lowerCaps,
+    bonuses: withLuck(bonuses),
+    earlyClass,
+    isPromoted,
+  };
+};
+
+// build hero
+function bh(name, finalClass, level, bases, growths, isEnemy = false) {
+  const isPromoted = level > 20;
+
+  heroList.push({
+    name,
+    earlyClass: isPromoted ? null : classDict[finalClass].earlyClass,
+    finalClass,
+    level: isPromoted ? level - 20 : level,
+    bases,
+    growths,
+    isEnemy,
+    isPromoted,
+  });
+};
+
 bc('ArcherF', [17,3,3,4,3,0,5,5], [70,35,40,32,35,15,20]);
 bc('ArcherM', [18,4,3,3,3,0,7,5], [70,35,40,32,35,15,15]);
 bc('Bard', [14,1,2,7,1,0,3,5], [45,45,30,60,70,0,13]);
@@ -56,3 +95,56 @@ bc('Valkyrie', [19,4,3,5,4,8,6,8], [45,35,25,45,40,10,40], [25,24,25,24,28], [3,
 bc('Warrior', [28,8,5,6,5,0,13,6], [80,45,25,20,15,16,17], [30,28,26,26,22], [3,1,2,0,3,3,1,2], 'Fighter');
 bc('WyvernLordF', [24,8,7,7,9,2,10,8], [75,40,30,20,20,20,17], [25,26,24,27,23], [], 'WyvernRiderF');
 bc('WyvernLordM', [25,9,5,7,10,1,11,8], [75,40,30,20,20,20,17], [27,25,23,28,22], [4,0,2,2,0,2,1,1], 'WyvernRiderM');
+
+bh('Bartre', 'Warrior', 2, [29,9,5,3,4,4,0,13], [85,50,35,40,30,30,25]);
+bh('Canas', 'DruidM', 8, [21,10,9,8,7,5,8,7], [70,45,40,35,25,25,45]);
+bh('Dart', 'Berserker', 8, [34,12,8,8,3,6,1,10], [70,65,20,60,35,20,15]);
+bh('Dorcas', 'Warrior', 3, [30,7,7,6,3,3,0,14], [80,60,40,20,45,25,15]);
+bh('Eliwood', 'KnightLord', 1, [18,5,5,7,7,5,0,7], [80,45,50,40,45,30,35]);
+bh('Erk', 'SageM', 1, [17,5,6,7,3,2,4,5], [65,40,40,50,30,20,40]);
+bh('Farina', 'Falcoknight', 12, [24,10,13,14,10,10,12,5], [75,50,40,45,45,25,30]);
+bh('Fiora', 'Falcoknight', 7, [21,8,11,13,6,6,7,5], [70,35,60,50,30,20,50]);
+bh('Florina', 'Falcoknight', 1, [17,5,7,9,7,4,4,4], [60,40,50,55,50,15,35]);
+bh('Geitz', 'Warrior', 23, [40,17,12,13,10,11,3,13], [85,50,30,40,40,20,20], true);
+bh('GeitzHM', 'Warrior', 23, [44,19,13,14,10,12,4,13], [85,50,30,40,40,20,20]);
+bh('Guy', 'SwordmasterM', 3, [21,6,11,11,5,5,0,5], [75,30,50,70,45,15,25], true);
+bh('GuyHM', 'SwordmasterM', 3, [25,8,13,13,5,6,1,5], [75,30,50,70,45,15,25]);
+bh('Harken', 'HeroM', 28, [38,21,20,17,12,15,10,11], [80,35,30,40,20,30,25], true);
+bh('HarkenHM', 'HeroM', 28, [42,23,22,18,12,16,11,11], [80,35,30,40,20,30,25]);
+bh('Hawkeye', 'Berserker', 24, [50,18,14,11,13,14,10,16], [50,40,30,25,40,20,35]);
+bh('Heath', 'WyvernLordM', 7, [28,11,8,7,7,10,1,9], [80,50,50,45,20,30,20], true);
+bh('HeathHM', 'WyvernLordM', 7, [32,13,10,9,7,11,2,9], [80,50,50,45,20,30,20]);
+bh('Hector', 'GreatLord', 1, [19,7,4,5,3,8,0,13], [90,60,45,35,30,50,25]);
+bh('Isadora', 'PaladinF', 21, [28,13,12,16,10,8,6,6], [75,30,35,50,45,20,25]);
+bh('Jaffar', 'Assassin', 33, [34,19,25,24,10,15,11,8], [65,15,40,35,20,30,30]);
+bh('Karel', 'SwordmasterM', 28, [31,16,23,20,15,13,12,9], [70,30,50,50,30,10,15]);
+bh('Karla', 'SwordmasterF', 25, [29,14,21,18,16,11,12,7], [60,25,45,55,40,10,20]);
+bh('Kent', 'PaladinM', 1, [20,6,6,7,2,5,1,9], [85,40,50,45,20,25,25]);
+bh('Legault', 'Assassin', 12, [26,8,11,15,10,8,3,9], [60,25,45,60,60,25,25], true);
+bh('LegaultHM', 'Assassin', 12, [29,8,13,17,10,8,4,9], [60,25,45,60,60,25,25]);
+bh('Louise', 'SniperF', 24, [28,12,14,17,16,9,12,6], [60,40,40,40,30,20,30]);
+bh('Lowen', 'PaladinM', 2, [23,7,5,7,3,7,0,10], [90,30,30,30,50,40,30]);
+bh('Lucius', 'BishopM', 3, [18,7,6,10,2,1,6,6], [55,60,50,40,20,10,60]);
+bh('Lyn', 'BladeLord', 1, [16,4,7,9,5,2,0,5], [70,40,60,60,55,20,30]);
+bh('Marcus', 'PaladinM', 21, [31,15,15,11,8,10,8,11], [65,30,50,25,30,15,35]);
+bh('Matthew', 'Assassin', 2, [18,4,4,11,2,3,0,7], [75,30,40,70,50,25,20]);
+bh('Nino', 'SageF', 5, [19,7,8,11,10,4,7,3], [55,50,55,60,45,15,50]);
+bh('Oswin', 'GeneralM', 9, [28,13,9,5,3,13,3,14], [90,40,30,30,35,55,30]);
+bh('Pent', 'SageM', 26, [33,18,21,17,14,11,16,8], [50,30,20,40,40,30,35]);
+bh('Priscilla', 'Valkyrie', 3, [16,6,6,8,7,3,6,4], [45,40,50,40,65,15,50]);
+bh('Rath', 'NmdTrooperM', 7, [25,8,9,10,5,7,2,7], [80,50,40,50,30,10,25]);
+bh('Raven', 'HeroM', 5, [25,8,11,13,2,5,1,8], [85,55,40,45,35,25,15], true);
+bh('RavenHM', 'HeroM', 5, [29,10,13,15,2,6,2,8], [85,55,40,45,35,25,15]);
+bh('Rebecca', 'SniperF', 1, [17,4,5,6,4,3,1,5], [60,40,50,60,50,15,30]);
+bh('Renault', 'BishopM', 36, [43,12,22,20,10,15,18,9], [60,40,30,35,15,20,40]);
+bh('Sain', 'PaladinM', 1, [19,8,4,6,4,6,0,9], [80,60,35,40,35,20,20]);
+bh('Serra', 'BishopF', 1, [17,2,5,8,6,2,5,4], [50,50,30,40,60,15,55]);
+bh('Vaida', 'WyvernLordF', 29, [43,20,19,13,11,21,6,12], [60,45,25,40,30,25,15], true);
+bh('VaidaHM', 'WyvernLordF', 29, [47,22,21,14,11,22,7,12], [60,45,25,40,30,25,15]);
+bh('Wallace', 'GeneralM', 12, [30,13,7,5,10,15,2,13], [70,45,40,20,30,35,35]);
+bh('Wil', 'SniperM', 2, [20,6,5,5,6,5,0,6], [75,50,50,40,40,20,25]);
+
+return [heroList, classDict];
+})();
+
+console.log(heroes, classes)

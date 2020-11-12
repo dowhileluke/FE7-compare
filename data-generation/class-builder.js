@@ -18,9 +18,6 @@ function DefineClassPromotionBonuses(name, bonuses, caps, basicForm) {
   extend(name, { bonuses, caps, basicForm });
 };
 
-DefineClassBaseStats('LordLyn', [16,4,7,9,2,0,5,5]);
-DefineClassBaseStats('LordEliwood', [18,5,5,7,5,0,7,5]);
-DefineClassBaseStats('LordHector', [19,7,4,5,8,0,13,5]);
 DefineClassBaseStats('BladeLord', [18,3,3,4,5,0,6,6]);
 DefineClassBaseStats('KnightLord', [18,3,3,4,5,0,9,7]);
 DefineClassBaseStats('GreatLord', [18,3,3,4,5,0,15,5]);
@@ -81,7 +78,6 @@ DefineClassBaseStats('Valkyrie', [19,4,3,5,4,8,6,8]);
 
 DefineClassGrowthRates('ArcherF',[70,35,40,32,35,15,20]);
 DefineClassGrowthRates('ArcherM',[70,35,40,32,35,15,15]);
-DefineClassGrowthRates('Archsage',[45,45,30,25,15,10,35]);
 DefineClassGrowthRates('Assassin',[50,5,45,40,40,5,20]);
 DefineClassGrowthRates('Bard',[45,45,30,60,70,0,13]);
 DefineClassGrowthRates('Berserker',[75,50,35,25,15,10,13]);
@@ -104,9 +100,6 @@ DefineClassGrowthRates('HeroM',[75,30,30,20,25,20,20]);
 DefineClassGrowthRates('KnightF',[80,40,30,15,25,28,20]);
 DefineClassGrowthRates('KnightM',[80,40,30,15,25,28,20]);
 DefineClassGrowthRates('KnightLord',[90,45,40,45,40,15,15]);
-DefineClassGrowthRates('LordEliwood',[90,45,40,45,40,15,15]);
-DefineClassGrowthRates('LordHector',[90,45,40,45,40,15,12]);
-DefineClassGrowthRates('LordLyn',[90,45,40,45,40,15,20]);
 DefineClassGrowthRates('MageF',[55,55,40,35,20,5,40]);
 DefineClassGrowthRates('MageM',[55,55,40,35,20,5,30]);
 DefineClassGrowthRates('MercenaryF',[80,40,40,32,30,18,30]);
@@ -141,35 +134,34 @@ DefineClassGrowthRates('WyvernLordM',[75,40,30,20,20,20,17]);
 DefineClassGrowthRates('WyvernRiderF',[80,45,35,30,25,25,17]);
 DefineClassGrowthRates('WyvernRiderM',[80,45,35,30,25,25,15]);
 
-DefineClassPromotionBonuses('Archsage', null, [30, 30, 25, 20, 30], 'unknown');
-DefineClassPromotionBonuses('Assassin', [3, 1, 0, 0, 2, 2, 0], [20, 30, 30, 20, 20], 'ThiefM');
-DefineClassPromotionBonuses('Berserker', [4, 1, 1, 1, 2, 2, 3], [30, 29, 28, 23, 21], 'Pirate');
-DefineClassPromotionBonuses('BishopF', [3, 1, 2, 1, 2, 2, 1], [25, 25, 26, 21, 30], 'Cleric');
-DefineClassPromotionBonuses('BishopM', [3, 2, 1, 0, 3, 2, 1], [25, 26, 24, 22, 30], 'Monk');
-DefineClassPromotionBonuses('BladeLord', [3, 2, 2, 0, 3, 5, 1], [24, 29, 30, 22, 22], 'Lord');
+DefineClassPromotionBonuses('Assassin', [3, 1, 0, 0, 2, 2, 0, 0], [20, 30, 30, 20, 20], 'ThiefM');
+DefineClassPromotionBonuses('Berserker', [4, 1, 1, 1, 2, 2, 1, 3], [30, 29, 28, 23, 21], 'Pirate');
+DefineClassPromotionBonuses('BishopF', [3, 1, 2, 1, 2, 2, 1, 1], [25, 25, 26, 21, 30], 'Cleric');
+DefineClassPromotionBonuses('BishopM', [3, 2, 1, 0, 3, 2, 1, 1], [25, 26, 24, 22, 30], 'Monk');
+DefineClassPromotionBonuses('BladeLord', [3, 2, 2, 0, 3, 5, 1, 1], [24, 29, 30, 22, 22], 'Lord');
 DefineClassPromotionBonuses('DruidF', null, [29, 26, 26, 20, 29], 'ShamanF');
-DefineClassPromotionBonuses('DruidM', [4, 0, 0, 3, 2, 2, 1], [29, 26, 26, 21, 28], 'ShamanM');
-DefineClassPromotionBonuses('Falcoknight', [5, 2, 0, 0, 2, 2, 1], [23, 25, 28, 23, 26], 'PegKnight');
+DefineClassPromotionBonuses('DruidM', [4, 0, 0, 3, 2, 2, 1, 1], [29, 26, 26, 21, 28], 'ShamanM');
+DefineClassPromotionBonuses('Falcoknight', [5, 2, 0, 0, 2, 2, 1, 1], [23, 25, 28, 23, 26], 'PegKnight');
 DefineClassPromotionBonuses('GeneralF', null, [25, 25, 22, 30, 26], 'KnightF');
-DefineClassPromotionBonuses('GeneralM', [4, 2, 2, 3, 2, 3, 2], [29, 27, 24, 30, 25], 'KnightM');
-DefineClassPromotionBonuses('GreatLord', [3, 0, 2, 3, 1, 5, 2], [30, 24, 24, 29, 20], 'Lord');
+DefineClassPromotionBonuses('GeneralM', [4, 2, 2, 3, 2, 3, 1, 2], [29, 27, 24, 30, 25], 'KnightM');
+DefineClassPromotionBonuses('GreatLord', [3, 0, 2, 3, 1, 5, 0, 2], [30, 24, 24, 29, 20], 'Lord');
 DefineClassPromotionBonuses('HeroF', null, [24, 30, 26, 24, 24], 'MercenaryF');
-DefineClassPromotionBonuses('HeroM', [4, 0, 2, 2, 2, 2, 1], [25, 30, 26, 25, 22], 'MercenaryM');
-DefineClassPromotionBonuses('KnightLord', [4, 2, 0, 1, 1, 3, 2], [27, 26, 24, 23, 25], 'Lord');
+DefineClassPromotionBonuses('HeroM', [4, 0, 2, 2, 2, 2, 1, 1], [25, 30, 26, 25, 22], 'MercenaryM');
+DefineClassPromotionBonuses('KnightLord', [4, 2, 0, 1, 1, 3, 2, 2], [27, 26, 24, 23, 25], 'Lord');
 DefineClassPromotionBonuses('NmdTrooperF', null, [23, 28, 30, 22, 25], 'NmdTrooperF');
-DefineClassPromotionBonuses('NmdTrooperM', [3, 2, 1, 1, 3, 3, 1], [25, 28, 30, 24, 23], 'NmdTrooperM');
+DefineClassPromotionBonuses('NmdTrooperM', [3, 2, 1, 1, 3, 3, 1, 1], [25, 28, 30, 24, 23], 'NmdTrooperM');
 DefineClassPromotionBonuses('PaladinF', null, [23, 27, 25, 24, 26], 'CavalierF');
-DefineClassPromotionBonuses('PaladinM', [2, 1, 1, 1, 2, 1, 2], [25, 26, 24, 25, 25], 'CavalierM');
-DefineClassPromotionBonuses('SageF', [3, 1, 1, 0, 3, 3, 1], [30, 28, 26, 21, 25], 'MageF');
-DefineClassPromotionBonuses('SageM', [4, 1, 0, 0, 3, 3, 1], [28, 30, 26, 21, 25], 'MageM');
-DefineClassPromotionBonuses('SniperF', [4, 3, 1, 1, 2, 2, 1], [24, 30, 29, 24, 24], 'ArcherF');
-DefineClassPromotionBonuses('SniperM', [3, 1, 2, 2, 2, 3, 1], [25, 30, 28, 25, 23], 'ArcherM');
+DefineClassPromotionBonuses('PaladinM', [2, 1, 1, 1, 2, 1, 1, 2], [25, 26, 24, 25, 25], 'CavalierM');
+DefineClassPromotionBonuses('SageF', [3, 1, 1, 0, 3, 3, 1, 1], [30, 28, 26, 21, 25], 'MageF');
+DefineClassPromotionBonuses('SageM', [4, 1, 0, 0, 3, 3, 1, 1], [28, 30, 26, 21, 25], 'MageM');
+DefineClassPromotionBonuses('SniperF', [4, 3, 1, 1, 2, 2, 1, 1], [24, 30, 29, 24, 24], 'ArcherF');
+DefineClassPromotionBonuses('SniperM', [3, 1, 2, 2, 2, 3, 1, 1], [25, 30, 28, 25, 23], 'ArcherM');
 DefineClassPromotionBonuses('SwordmasterF', null, [22, 29, 30, 22, 25], 'MyrmidonF');
-DefineClassPromotionBonuses('SwordmasterM', [5, 2, 0, 0, 2, 1, 1], [24, 29, 30, 22, 23], 'MyrmidonM');
-DefineClassPromotionBonuses('Valkyrie', [3, 2, 1, 0, 2, 3, 1], [25, 24, 25, 24, 28], 'Troubadour');
-DefineClassPromotionBonuses('Warrior', [3, 1, 2, 0, 3, 3, 2], [30, 28, 26, 26, 22], 'Fighter');
+DefineClassPromotionBonuses('SwordmasterM', [5, 2, 0, 0, 2, 1, 1, 1], [24, 29, 30, 22, 23], 'MyrmidonM');
+DefineClassPromotionBonuses('Valkyrie', [3, 2, 1, 0, 2, 3, 1, 1], [25, 24, 25, 24, 28], 'Troubadour');
+DefineClassPromotionBonuses('Warrior', [3, 1, 2, 0, 3, 3, 1, 2], [30, 28, 26, 26, 22], 'Fighter');
 DefineClassPromotionBonuses('WyvernLordF', null, [25, 26, 24, 27, 23], 'WyvernRiderF');
-DefineClassPromotionBonuses('WyvernLordM', [4, 0, 2, 2, 0, 2, 1], [27, 25, 23, 28, 22], 'WyvernRiderM');
+DefineClassPromotionBonuses('WyvernLordM', [4, 0, 2, 2, 0, 2, 1, 1], [27, 25, 23, 28, 22], 'WyvernRiderM');
 
 // average of all three Lords' bases/growths
 classes.Lord = {
@@ -234,8 +226,8 @@ function logClass(name) {
   ];
   const values = trimTrailingNulls(props);
   const parts = [
-    'BuildClass(',
-    values.map(x => x ? x : 'null').join(', '),
+    'bc(',
+    values.map(x => x ? x : '[]').join(', '),
     ');'
   ];
 
